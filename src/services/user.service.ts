@@ -30,7 +30,12 @@ const userServices = {
   },
   getOne: async (id: number) => {
     try {
-      const user = await UserDB.findAll({ where: { status: true } });
+      const user = await UserDB.findOne({
+        where: {
+          id: id,
+          status: true,
+        },
+      });
       if (!user) {
         return {
           message: `Registro no encontrado`,
@@ -55,7 +60,7 @@ const userServices = {
     }
   },
   create: async (data: Partial<UserInterface>) => {
-    data.name=data.name?.toLowerCase();
+    data.name = data.name?.toLowerCase();
     try {
       const user = await UserDB.create({ ...data });
       return {
@@ -74,7 +79,7 @@ const userServices = {
     }
   },
   update: async (id: number, dat: Partial<UserInterface>) => {
-    dat.name=dat.name?.toLowerCase();
+    dat.name = dat.name?.toLowerCase();
     try {
       const user = await UserDB.update(dat, { where: { id } });
       const { data } = await userServices.getOne(id);
@@ -117,9 +122,11 @@ const userServices = {
       };
     }
   },
-  getByEmail: async (email:string) => {
+  getByEmail: async (email: string) => {
     try {
-      const user: UserInterface | any = await UserDB.findAll({ where: { email } });
+      const user: UserInterface | any = await UserDB.findAll({
+        where: { email },
+      });
       if (!user) {
         return {
           message: `Registro no encontrado`,

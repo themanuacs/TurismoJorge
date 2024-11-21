@@ -21,14 +21,14 @@ export class RoleController {
       data,
     });
   };
-  createRole = async (req: Request, res: Response) => {
+  create = async (req: Request, res: Response) => {
     const { status, message, data } = await roleServices.create(req.body);
     return res.status(status).json({
       message,
       data,
     });
   };
-  updateRole = async (req: Request, res: Response) => {
+  update = async (req: Request, res: Response) => {
     const {id}=req.params
     const { status, message, data } = await roleServices.update(Number(id),req.body);
     return res.status(status).json({
@@ -37,7 +37,7 @@ export class RoleController {
     });
   };
 
-  deleteRole = async (req: Request, res: Response) => {
+  delete = async (req: Request, res: Response) => {
     const {id}=req.params
     const { status, message, data } = await roleServices.delete(Number(id));
     return res.status(status).json({

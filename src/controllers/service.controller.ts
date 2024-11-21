@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import { userServices } from "../services";
-
-export class UserController {
-  constructor() {}
+import { serviceServices } from "../services";
+export class ServiceController {
+  constructor() {
+    
+  }
 
   all = async (req: Request, res: Response) => {
-    const { status, message, data } = await userServices.getAll();
+    const { status, message, data } = await serviceServices.getAll();
     return res.status(status).json({
       message,
       data,
@@ -14,14 +15,14 @@ export class UserController {
 
   one = async (req: Request, res: Response) => {
     const {id}=req.params
-    const { status, message, data } = await userServices.getOne(parseInt(id) as number);
+    const { status, message, data } = await serviceServices.getOne(Number(id));
     return res.status(status).json({
       message,
       data,
     });
   };
   create = async (req: Request, res: Response) => {
-    const { status, message, data } = await userServices.create(req.body);
+    const { status, message, data } = await serviceServices.create(req.body);
     return res.status(status).json({
       message,
       data,
@@ -29,7 +30,7 @@ export class UserController {
   };
   update = async (req: Request, res: Response) => {
     const {id}=req.params
-    const { status, message, data } = await userServices.update(parseInt(id) as number,req.body);
+    const { status, message, data } = await serviceServices.update(Number(id),req.body);
     return res.status(status).json({
       message,
       data,
@@ -38,16 +39,7 @@ export class UserController {
 
   delete = async (req: Request, res: Response) => {
     const {id}=req.params
-    const { status, message, data } = await userServices.delete(parseInt(id) as number);
-    return res.status(status).json({
-      message,
-      data,
-    });
-  };
-  
-  login = async (req: Request, res: Response) => {
-
-    const { status, message, data } = await userServices.getByEmail(req.body);
+    const { status, message, data } = await serviceServices.delete(Number(id));
     return res.status(status).json({
       message,
       data,

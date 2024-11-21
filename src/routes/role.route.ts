@@ -237,7 +237,7 @@ router.post(
   roleValidator.validateRole,
   roleValidator.validateIfNameIsUse,
   validateFields,
-  roleController.createRole
+  roleController.create
 );
 
 /**
@@ -346,7 +346,7 @@ router.put(
   roleValidator.validateIfIdExist,
   roleValidator.validateIfNameIsUse,
   validateFields,
-  roleController.updateRole
+  roleController.update
 );
 
 /**
@@ -396,5 +396,5 @@ router.put(
  *                   type: object
  *                   example: {}
  */
-router.delete("/:id", roleController.deleteRole); 
+router.delete("/:id", roleController.delete); 
 export default router;

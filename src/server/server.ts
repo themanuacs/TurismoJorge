@@ -5,6 +5,7 @@ import swaggerUi from "swagger-ui-express";
 
 import {
   roleRoute,
+  serviceRoute,
   userRoute,
 } from "../routes/index.route";
 import { db } from "../config/sequelize.config";
@@ -20,6 +21,7 @@ export class Server {
     this.pre = "/api";
     this.paths = {
       roles: this.pre + "/roles",
+      services: this.pre + "/services",
       users: this.pre + "/users",
     };
     this.connectDB();
@@ -36,6 +38,7 @@ export class Server {
 
   routes() {
     this.app.use(this.paths.roles, roleRoute);
+    this.app.use(this.paths.services,serviceRoute);
     this.app.use(this.paths.users, userRoute);
   }
   async connectDB() {

@@ -16,7 +16,8 @@ const RoleModel = {
   },
   status: {
     type: DataTypes.BOOLEAN,
-    default: true,
+    allowNull: false,
+    defaultValue: true,
   }, 
 };
 

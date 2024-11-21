@@ -62,7 +62,7 @@ const roleServices = {
       };
     }
   },
-  create: async (data: RoleInterface) => {
+  create: async (data: Partial<RoleInterface>) => {
     data.name=data.name?.toLowerCase();
     try {
       const role = await RoleDB.create({ ...data });
@@ -81,7 +81,7 @@ const roleServices = {
       };
     }
   },
-  update: async (id: number|string, dat: RoleInterface) => {
+  update: async (id: number|string, dat: Partial<RoleInterface>) => {
     dat.name=dat.name?.toLowerCase();
     try {
       let role: RoleInterface | any = await RoleDB.update(dat, { where: { id } });

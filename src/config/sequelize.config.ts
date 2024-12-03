@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
 import {
+  CategoryModel,
+  ProductModel,
   RoleModel,
   ServiceModel,
   UserModel,
@@ -20,6 +22,8 @@ const db = new Sequelize(dbName, dbUser, dbPassword, {
   logging: false,
 });
 // CREAMOS LAS TABLAS EN ORDEN ALFABETICO
+const CategoryDB = db.define("categories", CategoryModel);
+const ProductDB = db.define("products", ProductModel);
 const RoleDB = db.define("roles", RoleModel);
 const ServiceDB = db.define("services", ServiceModel);
 const UserDB = db.define("users", UserModel);
@@ -42,6 +46,8 @@ const syncModels = async () => {
 syncModels();
 
 export {
+  CategoryDB,
+  ProductDB,
   RoleDB,
   ServiceDB,
   UserDB,

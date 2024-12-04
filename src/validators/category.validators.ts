@@ -1,13 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
-import { serviceServices } from "../services";
+import { categoryServices } from "../services";
 
-class ServiceValidator {
-  public validateService = [
-    body("name").notEmpty().withMessage("Service Name is required"),
-    body("name").isString().withMessage("Service Name must be string"),
-    body("price").notEmpty().withMessage("Service Price is required"),
-    body("price").isNumeric().withMessage("Service Price must be numeric"),
+class CategoryValidator {
+  public validateCategory = [
+    body("name").notEmpty().withMessage("Category Name is required"),
+    body("name").isString().withMessage("Category Name must be string"),
   ];
 
   //un middleware en el caso de campo id
@@ -17,7 +15,7 @@ class ServiceValidator {
     next: NextFunction
   ) => {
     const { id } = req.params;
-    const { status, message, data } = await serviceServices.getOne(id);
+    const { status, message, data } = await categoryServices.getOne(id);
     if (status == 500) {
       return res.status(status).json({
         message,
@@ -46,13 +44,13 @@ class ServiceValidator {
   ) => {
     const { id } = req.params;
     let { name } = req.body;
-    const { status, message, data } = await serviceServices.findByName(name);
+    const { status, message, data } = await categoryServices.findByName(name);
     if (status == 500) {
       return res.status(status).json({
         message,
       });
     } else if (status == 200) {
-      const service: any = data?.service;
+      const service: any = data?.category;
       if (id) {
         //caso si es para actualizar datos
         if (id != service.id) {
@@ -84,4 +82,4 @@ class ServiceValidator {
     next();
   };
 }
-export { ServiceValidator };
+export { CategoryValidator };

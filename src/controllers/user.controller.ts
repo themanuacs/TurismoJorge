@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { userServices } from "../services";
+import { testServices } from "../services/test.service";
 
 export class UserController {
   constructor() {}

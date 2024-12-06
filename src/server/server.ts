@@ -2,11 +2,11 @@ import express from "express";
 import cors from "cors";
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-
 import {
   categoryRoute,
   roleRoute,
   serviceRoute,
+  testRoute,
   userRoute,
 } from "../routes/index.route";
 import { db } from "../config/sequelize.config";
@@ -24,6 +24,7 @@ export class Server {
       categories: this.pre + "/categories",
       roles: this.pre + "/roles",
       services: this.pre + "/services",
+      tests: this.pre + "/tests",
       users: this.pre + "/users",
     };
     this.connectDB();
@@ -42,6 +43,7 @@ export class Server {
     this.app.use(this.paths.categories, categoryRoute);
     this.app.use(this.paths.roles, roleRoute);
     this.app.use(this.paths.services,serviceRoute);
+    this.app.use(this.paths.tests,testRoute);
     this.app.use(this.paths.users, userRoute);
   }
   async connectDB() {

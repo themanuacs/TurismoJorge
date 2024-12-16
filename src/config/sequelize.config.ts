@@ -1,17 +1,10 @@
 import { Sequelize } from "sequelize";
 import {
-  ChargeModel,
-  ConceptModel,
-  ContractModel,
-  DepartamentModel,
-  EmpleoyeeAssistanceModel,
-  EmpleoyeeModel,
-  EmpleoyeeUserModel,
-  PaysheetDetailModel,
-  PaysheetModel,
-  PerformanceEvaluationModel,
-  SupervisorModel,
-
+  CategoryModel,
+  ProductModel,
+  RoleModel,
+  ServiceModel,
+  UserModel,
 } from "../models";
 const dbName: string | undefined = process.env.DATABASE_NAME
   ? process.env.DATABASE_NAME
@@ -29,57 +22,17 @@ const db = new Sequelize(dbName, dbUser, dbPassword, {
   logging: false,
 });
 // CREAMOS LAS TABLAS EN ORDEN ALFABETICO
-const ChargeDB = db.define("Charge", ChargeModel);
-const ConceptDB = db.define("Concept", ConceptModel);
-const ContractDB = db.define("Contract", ContractModel);
-const DepartamentDB = db.define("departament", DepartamentModel);
-const EmpleoyeeAssistanceDB = db.define("EmpleoyeeAssistance", EmpleoyeeAssistanceModel);
-const EmpleoyeeDB = db.define("empleoyee", EmpleoyeeModel);
-const EmpleoyeeUserDB = db.define("EmpleoyeeUser", EmpleoyeeUserModel);
-const PaysheetDB = db.define("Paysheet", PaysheetModel);
-const PaysheetDetailDB = db.define("PaysheetDetail", PaysheetDetailModel);
-const PerformanceEvaluationDB = db.define("PerformanceEvaluation", PerformanceEvaluationModel);
-const SupervisorDB = db.define("Supervisor", SupervisorModel);
+const CategoryDB = db.define("categories", CategoryModel);
+const ProductDB = db.define("products", ProductModel);
+const RoleDB = db.define("roles", RoleModel);
+const ServiceDB = db.define("services", ServiceModel);
+const UserDB = db.define("users", UserModel);
+// En las relaciones importa el orden de la jerarquia
+RoleDB.hasMany(UserDB, { foreignKey: "role_id" });
+UserDB.belongsTo(RoleDB, { foreignKey: "role_id" });
 
-//Relaciones tabla Empleado
-EmpleoyeeDB.hasMany(EmpleoyeeUserDB, { foreignKey: "id_empleoyee" });
-EmpleoyeeUserDB.belongsTo(EmpleoyeeDB, { foreignKey: "id_empleoyee" });
 
-//Relaciones tabla Contrato
-ChargeDB.hasMany(ContractDB, { foreignKey: "id_charge" });
-ContractDB.belongsTo(ChargeDB, { foreignKey: "id_charge" });
 
-DepartamentDB.hasMany(ContractDB, { foreignKey: "id_departament" });
-ContractDB.belongsTo(DepartamentDB, { foreignKey: "id_departament" });
-
-EmpleoyeeDB.hasMany(ContractDB, { foreignKey: "id_empleoyee" });
-ContractDB.belongsTo(EmpleoyeeDB, { foreignKey: "id_empleoyee" });
-
-//Relaciones tabla Asistencias
-ContractDB.hasMany(EmpleoyeeAssistanceDB, { foreignKey: "id_contract" });
-EmpleoyeeAssistanceDB.belongsTo(ContractDB, { foreignKey: "id_contract" });
-
-//Relaciones tabla Supervisor
-ContractDB.hasMany(SupervisorDB, { foreignKey: "id_contrato" });
-SupervisorDB.belongsTo(ContractDB, { foreignKey: "id_contrato" });
-
-//Relaciones tabla Evaluacion de desempeño
-EmpleoyeeDB.hasMany(PerformanceEvaluationDB, { foreignKey: "id_empleoyee" });
-PerformanceEvaluationDB.belongsTo(EmpleoyeeDB, { foreignKey: "id_empleoyee" });
-
-SupervisorDB.hasMany(PerformanceEvaluationDB, { foreignKey: "id_supervisor" });
-PerformanceEvaluationDB.belongsTo(SupervisorDB, { foreignKey: "id_supervisor" });
-
-//Relaciones tabla Nomina
-ContractDB.hasMany(PaysheetDB, { foreignKey: "id_contract" });
-PaysheetDB.belongsTo(ContractDB, { foreignKey: "id_contract" });
-
-//Relaciones tabla Detalle Nomina
-PaysheetDB.hasMany(PaysheetDetailDB, { foreignKey: "id_paysheet" });
-PaysheetDetailDB.belongsTo(PaysheetDB, { foreignKey: "id_paysheet" });
-
-ConceptDB.hasMany(PaysheetDetailDB, { foreignKey: "id_concept" });
-PaysheetDetailDB.belongsTo(ConceptDB, { foreignKey: "id_concept" });
 
 // Sincroniza los modelos con la base de datos
 const syncModels = async () => {
@@ -93,16 +46,10 @@ const syncModels = async () => {
 syncModels();
 
 export {
-  ChargeDB,
-  ConceptDB,
-  ContractDB,
-  DepartamentDB,
-  EmpleoyeeAssistanceDB,
-  EmpleoyeeDB,
-  EmpleoyeeUserDB,
-  PaysheetDB,
-  PaysheetDetailDB,
-  PerformanceEvaluationDB,
-  SupervisorDB,
+  CategoryDB,
+  ProductDB,
+  RoleDB,
+  ServiceDB,
+  UserDB,
   db,
 };

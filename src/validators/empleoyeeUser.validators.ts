@@ -6,6 +6,10 @@ class EmpleoyeeUserValidator {
   public validateEmpleoyeeUser = [
     body("name").notEmpty().withMessage("EmpleoyeeUser Name is required"),
     body("name").isString().withMessage("EmpleoyeeUser Name must be string"),
+    body("password").notEmpty().withMessage("EmpleoyeeUser password is required"),
+    body("password").isString().withMessage("EmpleoyeeUser password must be string"),
+    body("id_empleoyee").notEmpty().withMessage("EmpleoyeeUser Name is required"),
+    body("id_empleoyee").isInt().withMessage("EmpleoyeeUser Name must be integer"),
   ];
 
   //un middleware en el caso de campo id

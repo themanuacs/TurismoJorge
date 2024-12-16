@@ -6,6 +6,10 @@ class ConceptValidator {
   public validateConcept = [
     body("name").notEmpty().withMessage("Concept Name is required"),
     body("name").isString().withMessage("Concept Name must be string"),
+    body("type").notEmpty().withMessage("Concept type is required"),
+    body("type").isString().withMessage("Concept type must be string"),
+    body("formule").notEmpty().withMessage("Concept formule is required"),
+    body("formule").isString().withMessage("Concept formule must be string"),
   ];
 
   //un middleware en el caso de campo id

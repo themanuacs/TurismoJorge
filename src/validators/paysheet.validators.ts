@@ -6,6 +6,12 @@ class PaysheetValidator {
   public validatePaysheet = [
     body("name").notEmpty().withMessage("Paysheet Name is required"),
     body("name").isString().withMessage("Paysheet Name must be string"),
+    body("start_date").notEmpty().withMessage("Paysheet start_date is required"),
+    body("start_date").isDate().withMessage("Paysheet start_date must be Date"),
+    body("end_date").notEmpty().withMessage("Paysheet end_date is required"),
+    body("end_date").isDate().withMessage("Paysheet end_date must be Date"),
+    body("id_contract").notEmpty().withMessage("Paysheet Name is required"),
+    body("id_contract").isInt().withMessage("Paysheet Name must be integer"),
   ];
 
   //un middleware en el caso de campo id

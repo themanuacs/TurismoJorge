@@ -6,6 +6,8 @@ class DepartamentValidator {
   public validateDepartament = [
     body("name").notEmpty().withMessage("Departament Name is required"),
     body("name").isString().withMessage("Departament Name must be string"),
+    body("description").notEmpty().withMessage("Departament description is required"),
+    body("description").isString().withMessage("Departament description must be string"),
   ];
 
   //un middleware en el caso de campo id

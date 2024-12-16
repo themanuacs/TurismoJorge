@@ -6,6 +6,16 @@ class PerformanceEvaluationValidator {
   public validatePerformanceEvaluation = [
     body("name").notEmpty().withMessage("PerformanceEvaluation Name is required"),
     body("name").isString().withMessage("PerformanceEvaluation Name must be string"),
+    body("date").notEmpty().withMessage("PerformanceEvaluation date is required"),
+    body("date").isDate().withMessage("PerformanceEvaluation date must be Date"),
+    body("qualification").notEmpty().withMessage("PerformanceEvaluation qualification is required"),
+    body("qualification").isInt().withMessage("PerformanceEvaluation qualification must be integer"),
+    body("comments").notEmpty().withMessage("PerformanceEvaluation comments is required"),
+    body("comments").isString().withMessage("PerformanceEvaluation comments must be string"),
+    body("id_empleoyee").notEmpty().withMessage("PerformanceEvaluation id_empleoyee is required"),
+    body("id_empleoyee").isInt().withMessage("PerformanceEvaluation id_empleoyee must be integer"),
+    body("id_supervisor").notEmpty().withMessage("PerformanceEvaluation id_supervisor is required"),
+    body("id_supervisor").isInt().withMessage("PerformanceEvaluation id_supervisor must be integer"),
   ];
 
   //un middleware en el caso de campo id

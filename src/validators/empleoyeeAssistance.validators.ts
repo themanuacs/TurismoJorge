@@ -1,11 +1,28 @@
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 import { EmpleoyeeAssistanceServices } from "../services";
+import { format } from "path";
 
 class EmpleoyeeAssistanceValidator {
   public validateEmpleoyeeAssistance = [
     body("name").notEmpty().withMessage("EmpleoyeeAssistance Name is required"),
     body("name").isString().withMessage("EmpleoyeeAssistance Name must be string"),
+
+    body("date").notEmpty().withMessage("EmpleoyeeAssistance date is required"),
+    body("date").isDate().withMessage("EmpleoyeeAssistance date must be Date"),
+
+    body("entry").notEmpty().withMessage("EmpleoyeeAssistance entry is required"),
+
+    //Error en isTime() Revisar
+//  body("entry").isTime().withMessage("EmpleoyeeAssistance entry must be Time"),
+
+    body("exit").notEmpty().withMessage("EmpleoyeeAssistance exit is required"),
+
+    //Error en isTime() Revisar
+//  body("exit").isTime().withMessage("EmpleoyeeAssistance exit must be Time"),
+
+    body("id_contract").notEmpty().withMessage("EmpleoyeeAssistance id_contract is required"),
+    body("id_contract").isInt().withMessage("EmpleoyeeAssistance id_contract must be integer"),
   ];
 
   //un middleware en el caso de campo id
